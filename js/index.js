@@ -1,5 +1,7 @@
 var output;
 var input;
+var pattern = '\(\\d+,\\d+,\\d+\)';
+var regex = new RegExp(pattern, 'g');
 
 function include(arr, obj) {
     var index = -1;
@@ -80,14 +82,26 @@ Edge.prototype.toString = function() {
 function init () {
     output = document.getElementById("out");
     input = document.getElementById("in");
+    input.value = "(1,2,3)(4,5,6)";
 }
 
 function validate() {
     console.log(input.value);
+    parse(input.value);
+}
+
+function parse(text) {
     var graph = new Graph();
-    graph.addEdge(1, 2, 3);
-    graph.addEdge(2, 3, 1);
-    graph.addEdge(4, 4, 1);
+    var item;
+    while ((item = regex.exec(text)) != null) {
+        var numbers = item[0].split(',');
+        if (numbers.length == 3) {
+            var s = numbers[0];
+            var d = numbers[1];
+            var v = numbers[2];
+            graph.addEdge(s, d, v);
+        }
+    }
     graph.print();
 }
 
