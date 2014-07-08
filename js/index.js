@@ -146,6 +146,15 @@ Graph.prototype.clearHTMLCostsTable = function () {
 }
 
 Graph.prototype.syncHTMLTable = function () {
+    this.syncCostTable();
+    this.syncPheromoneTable();
+}
+
+Graph.prototype.syncPheromoneTable = function () {
+
+}
+
+Graph.prototype.syncCostTable = function () {
     var table = this.clearHTMLCostsTable();
     var n = this.nodes.length;
     var r = table.insertRow(0);
